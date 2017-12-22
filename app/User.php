@@ -1,0 +1,50 @@
+<?php
+
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    /** Niveles de usuario */
+    const LEVEL_USER = 1;
+    const LEVEL_ADMIN = 2;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'phone', 'level',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+
+    public function __construct(array $attributes = [])
+    {
+        $this->level = self::LEVEL_USER;
+        parent::__construct($attributes);
+    }
+
+    /**
+     * Todas las publicaciones del usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function publications()
+    {
+        return $this->hasMany('App\Publication', 'user_id');
+    }
+}
