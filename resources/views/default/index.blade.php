@@ -325,7 +325,6 @@
 <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.zoomslider.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
-<script src="{{ asset('js/typeahead.js') }}"></script>
 <script>
     /**
      * Cree este metodo para corregir un error al generar
@@ -339,6 +338,59 @@
         $(hide).removeClass('in').removeClass('active');
         $(show).addClass('in').addClass('active');
     }
+
+    /**
+     * Consulta las publicaciones para el buscador
+     *
+     */
+    function searchAutoComplete()
+    {
+        var words = $('#searchAutocomplete').val();
+
+        if (words.length < 3) {
+            loadAutoComplete([]);
+            return;
+        }
+
+        $.ajax({
+            url: '{{ route('index.publication.search') }}',
+            data: {
+                search: words
+            },
+            success: function(data) {
+                loadAutoComplete(data);
+            },
+            error: function (err) {
+                loadAutoComplete([]);
+            }
+        });
+    }
+
+    /**
+     * Carga la data de autocompletado
+     *
+     * @param data
+     */
+    function loadAutoComplete(data)
+    {
+        var space = $('#spaceAutocomplete');
+        space.css('display', 'none');
+
+        if (data.length) {
+
+            var html = '';
+            var url = '{{ route('index.publication.searchWords') }}';
+            for (var d in data) {
+                html += '<p><a href="' + url + '?words=' + data[d].words + '">';
+                html += data[d].label;
+                html += '</a></p>';
+            }
+
+            space.css('display', 'block');
+            space.html(html);
+        }
+    }
+
 </script>
 
 </body>

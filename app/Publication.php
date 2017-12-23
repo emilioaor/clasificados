@@ -36,7 +36,7 @@ class Publication extends Model
         'title', 'price', 'location', 'user_id',
         'category_id', 'description', 'status',
         'public_id', 'hash_tags', 'transaction',
-        'video',
+        'video', 'search',
     ];
 
     /**
@@ -100,8 +100,23 @@ class Publication extends Model
         }
 
         $this->user_id = Auth::user()->id;
+        $this->generateSearch();
 
         return parent::save($options);
+    }
+
+    /**
+     * Realiza cambios en el objeto antes de actualizar
+     *
+     * @param array $attributes
+     * @param array $options
+     * @return bool
+     */
+    public function update(array $attributes = [], array $options = [])
+    {
+        $this->generateSearch();
+
+        return parent::update($attributes, $options);
     }
 
     /**
@@ -209,5 +224,112 @@ class Publication extends Model
     public function getFormattedPrice()
     {
         return number_format($this->price, '2', ',', '.');
+    }
+
+    /**
+     * Toma toda la informacion de la publicacion como titulo,
+     * contenido y hashtags y obtiene cuales son las palabras
+     * mas utilizadas para generar una cadena de caracteres
+     * que pueda ser utilizada en las busquedas
+     */
+    private function generateSearch()
+    {
+        $words = [];
+
+        // Cuenta las palabras en el titulo
+        $words = $this->countWords($this->title, $words, ' ');
+        // Cuenta las palabras en la descripcion
+        $words = $this->countWords($this->description, $words, ' ');
+        // Cuenta las palabras en los hashtags
+        if (! empty($this->hash_tags)) {
+            $hashTags = is_array($this->hash_tags) ? implode(',', $this->hash_tags) : $this->hash_tags;
+
+            $words = $this->countWords(str_replace('#', '', $hashTags), $words, ',');
+        }
+        // Limpia las palabras que no se repitan
+        $search = [];
+        foreach ($words as $k => $c) {
+            if ($c > 1) {
+                $search[] = $k;
+            }
+        }
+
+        $this->search = json_encode($search);
+    }
+
+    /**
+     * Cuenta la cantidad de palabras en un texto
+     *
+     * @param $text, Texto de que va a contar
+     * @param array $words, Array donde se guardan los resultados para acumular el resultado de varios conteos
+     * @params $delimiter, Delimitador para separar las palabras
+     * @return array
+     */
+    private function countWords($text, $words, $delimiter)
+    {
+        $explode = explode($delimiter, $text);
+
+        foreach ($explode as $keyWord => $word) {
+
+            // Limpio la palabra
+            $word = $this->cleanWord($word);
+
+            if (! isset($words[$word])) {
+                $words[$word] = 1;
+            } else {
+                // Ya existe la palabra subo el contador
+                $words[$word] ++;
+
+                // Agrego tambien la combinacion de dos palabras para las palabras mas utilizadas
+                if (isset($explode[$keyWord - 1])) {
+                    // Si existe una palabra anterior, agrego esa y la actual
+                    $twoWord =  $this->cleanWord($explode[$keyWord - 1]) . ' ' . $word;
+
+                    if (! isset($words[$twoWord])) {
+                        // Si no existe lo inicializo
+                        $words[$twoWord] = 1;
+                    } else {
+                        // Si existe lo incremento
+                        $words[$twoWord] ++;
+                    }
+                }
+
+                // Agrego tambien la combinacion de tres palabras para las palabras mas utilizadas
+                if (isset($explode[$keyWord - 1]) && isset($explode[$keyWord - 2])) {
+                    // Si existe una palabra anterior, agrego esa y la actual
+                    $threeWord =  $this->cleanWord($explode[$keyWord - 2]) . ' ' . $this->cleanWord($explode[$keyWord - 1]) . ' ' . $word;
+
+                    if (! isset($words[$threeWord])) {
+                        // Si no existe lo inicializo
+                        $words[$threeWord] = 1;
+                    } else {
+                        // Si existe lo incremento
+                        $words[$threeWord] ++;
+                    }
+                }
+            }
+        }
+
+        return $words;
+    }
+
+    /**
+     * Dejo lo palabra lo mas limpia posible
+     *
+     * @param $word
+     * @return mixed
+     */
+    private function cleanWord($word)
+    {
+        $word = strtolower($word);
+        $word = str_replace('á', 'a', $word);
+        $word = str_replace('é', 'e', $word);
+        $word = str_replace('í', 'i', $word);
+        $word = str_replace('ó', 'o', $word);
+        $word = str_replace('ú', 'u', $word);
+        $word = str_replace("\n", '', $word);
+        $word = str_replace("\r", '', $word);
+
+        return $word;
     }
 }

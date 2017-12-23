@@ -8,7 +8,6 @@
 //TODO configuracion
 
 // DEFAULT
-//TODO Habilitar la busqueda
 //TODO Agregar información de contacto, etc
 //TODO Eliminar por gratis despues de 30 dias
 //TODO Funcionalidad de compartir por redes sociales

@@ -1,37 +1,11 @@
 <div class="search-box">
     <div class="search-autocomplete">
-        <input name="name" class="typeahead tt-query" placeholder="Ingrese su busqueda..." spellcheck="false" autocomplete="off">
+        <input class="typeahead tt-query" id="searchAutocomplete" onkeyup="searchAutoComplete()" placeholder="Ingrese su busqueda..." spellcheck="false" autocomplete="off">
         <span class="glyphicon glyphicon-search"> </span>
 
-        <script>
-            $(document).ready(function(){
-                // Defining the local dataset
-                var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+        <div id="spaceAutocomplete" class="autocomplete">
 
-                // Constructing the suggestion engine
-                var results = new Bloodhound({
-                    datumTokenizer: Bloodhound.tokenizers.whitespace,
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    local: cars
-                });
-
-                // Initializing the typeahead
-                $('.typeahead').typeahead({
-                            hint: true,
-                            highlight: true, /* Enable substring highlighting */
-                            minLength: 3 /* Specify minimum characters required for showing result */
-                        },
-                        {
-                            name: 'Publicaciones',
-                            source: results
-                        });
-            });
-
-            $.ajax({
-                url: '',
-
-            });
-        </script>
+        </div>
     </div>
 
     <ul>

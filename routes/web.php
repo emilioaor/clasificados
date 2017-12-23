@@ -4,6 +4,8 @@
 Route::get('/', ['uses' => 'DefaultController@index', 'as' => 'index.index']);
 Route::post('/register', ['uses' => 'DefaultController@register', 'as' => 'index.register']);
 Route::post('/login', ['uses' => 'DefaultController@login', 'as' => 'index.login']);
+Route::get('/publication/search/async', ['uses' => 'PublicationController@search', 'as' => 'index.publication.search']);
+Route::get('/publication/search/words', ['uses' => 'PublicationController@searchWords', 'as' => 'index.publication.searchWords']);
 Route::get('/publication/{publication}', ['uses' => 'PublicationController@show', 'as' => 'index.publication.show']);
 
 // Usuarios normales

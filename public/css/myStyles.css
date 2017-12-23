@@ -200,7 +200,7 @@ select {
     height: 30px;
     padding: 8px 12px;
     width: 100%;
-    min-width: 400px;
+    max-width: 400px;
     box-shadow: none;
     font-size: 13px;
 }
@@ -240,6 +240,10 @@ select {
     top: 10px;
     left: 10px;
     width: 50%;
+    text-align: left;
+}
+.search-autocomplete input {
+    color: #fff;
 }
 .search-autocomplete span {
     color: #fff;
@@ -247,4 +251,15 @@ select {
     display: inline-block;
     margin-top: 10px;
     margin-left: 10px;
+}
+.search-autocomplete .autocomplete {
+    background-color: #fff;
+    border-radius: 3px;
+    margin-top: 10px;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.search-autocomplete .autocomplete p {
+    padding: 10px;
 }
