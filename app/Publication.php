@@ -186,6 +186,17 @@ class Publication extends Model
     }
 
     /**
+     * Todos los usuario que tienen esta publicacion en su lista
+     * de deseos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function whistListUser()
+    {
+        return $this->belongsToMany('App\User', 'whist_list', 'publication_id', 'user_id');
+    }
+
+    /**
      * Contruye un array con las opciones seleccionadas para esta publicacion
      *
      * @return array

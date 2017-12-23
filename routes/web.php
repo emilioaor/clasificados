@@ -16,6 +16,11 @@ Route::group(['prefix' => 'user'], function() {
     Route::put('/publication/{publication}/updatePosition', ['uses' => 'User\PublicationController@updatePosition', 'as' => 'publication.updatePosition']);
     Route::post('/publication/{publication}/addComment', ['uses' => 'User\PublicationController@addComment', 'as' => 'publication.addComment']);
     Route::resource('/publication', 'User\PublicationController');
+
+    // Lista de deseos
+    Route::get('whistList', ['uses' => 'User\WhistListController@index', 'as' => 'user.whistList.index']);
+    Route::post('whistList/{publication}', ['uses' => 'User\WhistListController@addPublication', 'as' => 'user.whistList.addPublication']);
+    Route::delete('whistList/{publication}', ['uses' => 'User\WhistListController@removePublication', 'as' => 'user.whistList.removePublication']);
 });
 
 // Admin

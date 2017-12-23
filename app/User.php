@@ -47,4 +47,30 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Publication', 'user_id');
     }
+
+    /**
+     * Todas las publicaciones en lista de deseos del usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function whistListPublications()
+    {
+        return $this->belongsToMany('App\Publication', 'whist_list', 'user_id', 'publication_id');
+    }
+
+    /**
+     * Indica si una publicacion esta en la lista de deseos
+     * del usuario
+     *
+     * @param publicationId
+     * @return bool
+     */
+    public function hasWhistListPublication($publicationId)
+    {
+        if ($this->whistListPublications()->find($publicationId)) {
+            return true;
+        }
+
+        return false;
+    }
 }

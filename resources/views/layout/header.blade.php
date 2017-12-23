@@ -10,6 +10,12 @@
 
     <ul>
         <li>
+            <a href="{{ route('user.whistList.index') }}">
+                <span class="glyphicon glyphicon-gift"></span>
+                Lista de deseos
+            </a>
+        </li>
+        <li>
             @if(Auth::check())
                 @if(Auth::user()->level === \App\User::LEVEL_ADMIN)
                     <a href="{{ route('admin.index') }}"><span class="glyphicon glyphicon-home"></span> Panel</a>

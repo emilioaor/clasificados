@@ -263,3 +263,9 @@ select {
 .search-autocomplete .autocomplete p {
     padding: 10px;
 }
+.single-left2 ul.com li.btn {
+    color: #eeeeee;
+}
+.single-left2 ul.com li.btn span {
+    left: 0;
+}

@@ -38,6 +38,17 @@
             @endif
             <i>|</i>
         </li>
+
+        <li>
+            @if($selected === 'user.whistList.index')
+                <i class="glyphicon glyphicon-gift"></i> Lista de deseos
+            @else
+                <a href="{{ route('user.whistList.index') }}">
+                    <i class="glyphicon glyphicon-gift"></i> Lista de deseos
+                </a>
+            @endif
+            <i>|</i>
+        </li>
         @endif
 
         <li>

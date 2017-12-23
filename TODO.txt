@@ -3,7 +3,6 @@
 
 // USUARIO
 //TODO Publicidad en los posts
-//TODO Whislist
 //TODO notificaciones en base a lista de deseos
 //TODO configuracion
 

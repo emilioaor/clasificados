@@ -27,7 +27,7 @@ class PublicationController extends Controller
             $publications->where('user_id', Auth::user()->id);
         }
 
-        return view('user.publication.index', ['publications' => $publications->paginate(10)]);
+        return view('user.publication.index', ['publications' => $publications->paginate(15)]);
     }
 
     /**

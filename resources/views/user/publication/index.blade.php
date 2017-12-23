@@ -41,7 +41,7 @@
                                 <span class="bg-warning text-warning">Borrador</span>
                             @endif
                         </td>
-                        <td>{{ $publication->getFormattedPrice() }} {{ \App\Publication::CURRENCY_SYMBOL }}</td>
+                        <td>{{ \App\Publication::CURRENCY_SYMBOL }}{{ $publication->getFormattedPrice() }}</td>
                         <td>
                             <button class="btn-warning" title="Editar" onclick="location.href = '{{ route('publication.edit', ['publication' => $publication->public_id]) }}'">
                                 <i class="glyphicon glyphicon-edit"></i>

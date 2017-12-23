@@ -47,6 +47,26 @@
                     <ul class="com">
                         <li><span class="glyphicon glyphicon-phone" aria-hidden="true"></span><a>{{ $publication->user->phone }}</a></li>
                         <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a>{{ count($publication->comments) }} Comentarios</a></li>
+                        @if(Auth::check() && Auth::user()->id !== $publication->user_id)
+                            @if(Auth::user()->hasWhistListPublication($publication->id))
+                                <li class="btn btn-danger" onclick="$('#whistListForm').submit()">
+                                    <form action="{{ route('user.whistList.removePublication', ['publication' => $publication->public_id]) }}" id="whistListForm" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                    </form>
+                                    <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+                                    Ya no lo deseo
+                                </li>
+                            @else
+                                <li class="btn btn-success" onclick="$('#whistListForm').submit()">
+                                    <form action="{{ route('user.whistList.addPublication', ['publication' => $publication->public_id]) }}" id="whistListForm" method="post">
+                                        {{ csrf_field() }}
+                                    </form>
+                                    <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+                                    Lo deseo
+                                </li>
+                            @endif
+                        @endif
 
                         <p class="price">{{ \App\Publication::CURRENCY_SYMBOL . $publication->getFormattedPrice() }}</p>
                     </ul>
