@@ -178,7 +178,7 @@
                     @foreach($relatedPosts as $post)
                         <div class="related-post">
                             <div class="related-post-left">
-                                <a href="{{ route('publication.show', ['publication' => $post->public_id]) }}">
+                                <a href="{{ route('index.publication.show', ['publication' => $post->public_id]) }}">
                                     @if(count($post->publicationImages))
                                         <img
                                             src="{{ asset('uploads/publication/small/' . $post->id . '/' . $post->publicationImages[0]->url) }}"
@@ -193,7 +193,7 @@
                                 </a>
                             </div>
                             <div class="related-post-right">
-                                <h4><a href="{{ route('publication.show', ['publication' => $post->public_id]) }}">{{ str_limit($post->title, 15, '..') }}</a></h4>
+                                <h4><a href="{{ route('index.publication.show', ['publication' => $post->public_id]) }}">{{ str_limit($post->title, 15, '..') }}</a></h4>
                                 <p>{{ str_limit($post->description, 15, '..') }}</p>
                             </div>
                             <div class="clearfix"> </div>
