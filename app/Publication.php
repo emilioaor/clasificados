@@ -344,4 +344,19 @@ class Publication extends Model
 
         return $word;
     }
+
+    /**
+     * Obtiene las ultimas publicaciones
+     *
+     * @param int $limit
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getRecent($limit = 10)
+    {
+        return Publication::where('status', self::STATUS_PUBLISHED)
+            ->orderByDesc('created_at')
+            ->limit($limit)
+            ->get()
+        ;
+    }
 }

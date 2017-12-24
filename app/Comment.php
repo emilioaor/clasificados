@@ -70,4 +70,22 @@ class Comment extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    /**
+     * Obtiene los ultimos comentarios
+     *
+     * @param int $limit
+     * @return $this
+     */
+    public static function getRecent($limit = 10)
+    {
+        return Comment::select(['comment', 'name', 'public_id', 'publications.id', 'title'])
+            ->join('publications', 'comments.publication_id', '=', 'publications.id')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->where('publications.status', Publication::STATUS_PUBLISHED)
+            ->orderByDesc('comments.created_at')
+            ->limit($limit)
+            ->get()
+        ;
+    }
 }
