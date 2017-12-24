@@ -15,6 +15,9 @@
                 <th>Categoría</th>
                 <th>Estatus</th>
                 <th>Precio</th>
+                @if(Auth::user()->level === \App\User::LEVEL_ADMIN)
+                    <th></th>
+                @endif
                 <th width="5%"></th>
                 <th width="5%"></th>
             </tr>
@@ -44,6 +47,18 @@
                             @endif
                         </td>
                         <td>{{ \App\Publication::CURRENCY_SYMBOL }}{{ $publication->getFormattedPrice() }}</td>
+                        @if(Auth::user()->level === \App\User::LEVEL_ADMIN)
+                            <td class="text-center">
+
+                                <button
+                                        class="btn-info pop-button"
+                                        data-toggle="popover"
+                                        title="Usuario"
+                                        data-content="{{ $publication->user->email }}">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </button>
+                            </td>
+                        @endif
                         <td>
                             <button
                                     @if($publication->status !== \App\Publication::STATUS_EXPIRED)
@@ -76,7 +91,13 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="8">Sin publicaciones, agrega una <a href="{{ route('publication.create') }}">nueva</a></td>
+                    <td colspan="{{ Auth::user()->level === \App\User::LEVEL_ADMIN ? '9' : '8' }}">
+                        Sin publicaciones
+                        @if(Auth::user()->level !== \App\User::LEVEL_ADMIN)
+                            , agrega una
+                            <a href="{{ route('publication.create') }}">nueva</a>
+                        @endif
+                    </td>
                 </tr>
             @endif
         </tbody>
@@ -85,4 +106,12 @@
     <div class="text-center">
         {{ $publications->render() }}
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 @endsection

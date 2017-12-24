@@ -52,44 +52,37 @@
             <div class="modal-header one">
                 <button type="button" class="close sg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="discount one">
-                    <h3>Sign Up</h3>
+                    <h3>Registro</h3>
 
                 </div>
             </div>
             <div class="modal-body about">
                 <div class="login-top sign-top one">
-                    <form action="#" method="post">
-                        <input type="text" name="name" class="name active" placeholder="Your Name" required="">
+                    <form action="{{ route('index.register') }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="text" name="name" class="name active" placeholder="Tu nombre" required="">
                         <input type="text" name="email" class="email" placeholder="Email" required="">
-                        <input type="password" name="password" class="password" placeholder="Password" required="">
-                        <input type="checkbox" id="brand1" value="">
-                        <label for="brand1"><span></span> Remember me</label>
+                        <input type="password" name="password" class="password" placeholder="Contraseña" required="">
+                        <input type="password" name="password_confirmation" class="password" placeholder="Confirmar contraseña" required="">
+                        <input type="text" name="phone" class="phone" placeholder="Telefono" required="">
                         <div class="login-bottom one">
                             <ul>
                                 <li>
-                                    <a href="#">Forgot password?</a>
+
                                 </li>
                                 <li>
 
-                                    <input type="submit" value="SIGN UP">
+                                    <input type="submit" value="Registro">
 
                                 </li>
                                 <div class="clearfix"></div>
                             </ul>
                         </div>
                     </form>
+
                 </div>
 
-
             </div>
-            <div class="social-icons">
-                <ul>
-                    <li><a href="#"><span class="icons"></span><span class="text">Facebook</span></a></li>
-                    <li class="twt"><a href="#"><span class="icons"></span><span class="text">Twitter</span></a></li>
-                    <li class="ggp"><a href="#"><span class="icons"></span><span class="text">Google+</span></a></li>
-                </ul>
-            </div>
-
         </div>
     </div>
 </div>

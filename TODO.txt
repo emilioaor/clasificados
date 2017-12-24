@@ -6,12 +6,12 @@
 
 // DEFAULT
 //TODO Agregar información de contacto, etc
-//TODO Eliminar por gratis despues de 30 dias
 //TODO Funcionalidad de compartir por redes sociales
-//TODO Recuperar contraseña
 //TODO Footer
+//TODO Imagenes reales
 
 //Middlewares
 //TODO roles de usuario
 //TODO Publicacion solo por creadores
 //TODO Restringir publicaciones publicadas
+//TODO Solo usuarios sin autenticacion(Recuperar contraseña)

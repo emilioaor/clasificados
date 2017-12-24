@@ -87,7 +87,8 @@ class PublicationController extends Controller
         $search = explode(' ', $search);
 
         // Busco coincidencia en la busqueda
-        $publications = Publication::where('publications.status', Publication::STATUS_PUBLISHED);
+        $publications = Publication::where('publications.status', Publication::STATUS_PUBLISHED)
+            ->orderByDesc('transaction');
         //Por cada palabra de la busqueda agrego una condicion
         foreach ($search as $i => $s) {
             if (strlen($s) > 2) {

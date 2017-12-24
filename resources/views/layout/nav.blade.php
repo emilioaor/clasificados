@@ -1,21 +1,20 @@
 <ul>
     @if(Auth::check())
+
         @if(Auth::user()->level === App\User::LEVEL_ADMIN)
-
-                <!-- Administrador -->
-        <li>
-            @if($selected === 'admin.index')
-                <i class="glyphicon glyphicon-tasks"></i> Categorías
-            @else
-                <a href="{{ route('admin.index') }}">
+            <!-- Administrador -->
+            <li>
+                @if($selected === 'admin.index')
                     <i class="glyphicon glyphicon-tasks"></i> Categorías
-                </a>
-            @endif
-        </li>
+                @else
+                    <a href="{{ route('admin.index') }}">
+                        <i class="glyphicon glyphicon-tasks"></i> Categorías
+                    </a>
+                @endif
+            </li>
+            <!-- /Administrador -->
+        @endif
 
-        @else
-
-                <!-- Usuario -->
         <li>
             @if($selected === 'publication.index')
                 <i class="glyphicon glyphicon-blackboard"></i> Publicaciones
@@ -26,25 +25,28 @@
             @endif
         </li>
 
-        <li>
-            @if($selected === 'publication.create')
-                <i class="glyphicon glyphicon-plus"></i> Nueva publicación
-            @else
-                <a href="{{ route('publication.create') }}">
+        @if(Auth::user()->level === App\User::LEVEL_USER)
+            <!-- Usuario -->
+            <li>
+                @if($selected === 'publication.create')
                     <i class="glyphicon glyphicon-plus"></i> Nueva publicación
-                </a>
-            @endif
-        </li>
+                @else
+                    <a href="{{ route('publication.create') }}">
+                        <i class="glyphicon glyphicon-plus"></i> Nueva publicación
+                    </a>
+                @endif
+            </li>
 
-        <li>
-            @if($selected === 'user.whistList.index')
-                <i class="glyphicon glyphicon-gift"></i> Lista de deseos
-            @else
-                <a href="{{ route('user.whistList.index') }}">
+            <li>
+                @if($selected === 'user.whistList.index')
                     <i class="glyphicon glyphicon-gift"></i> Lista de deseos
-                </a>
-            @endif
-        </li>
+                @else
+                    <a href="{{ route('user.whistList.index') }}">
+                        <i class="glyphicon glyphicon-gift"></i> Lista de deseos
+                    </a>
+                @endif
+            </li>
+            <!-- /Usuario -->
         @endif
 
         <li>

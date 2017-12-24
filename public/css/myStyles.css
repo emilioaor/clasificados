@@ -275,3 +275,7 @@ select {
 .service-breadcrumb li {
     padding-right: 10px;
 }
+.search-box	ul li a,
+.search-box	ul li button{
+    margin: 0 .5rem !important;
+}

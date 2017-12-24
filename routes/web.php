@@ -1,9 +1,15 @@
 <?php
 
 // Usuarios sin autenticar
-Route::get('/', ['uses' => 'DefaultController@index', 'as' => 'index.index']);
 Route::post('/register', ['uses' => 'DefaultController@register', 'as' => 'index.register']);
 Route::post('/login', ['uses' => 'DefaultController@login', 'as' => 'index.login']);
+Route::get('/passwordReset', ['uses' => 'DefaultController@passwordReset', 'as' => 'index.passwordReset']);
+Route::post('/emailPasswordReset', ['uses' => 'DefaultController@emailPasswordReset', 'as' => 'index.emailPasswordReset']);
+Route::get('/restorePassword/{token}', ['uses' => 'DefaultController@restorePassword', 'as' => 'password.reset']);
+Route::put('/changePassword/{token}', ['uses' => 'DefaultController@changePassword', 'as' => 'index.changePassword']);
+
+// Cualquier usuario
+Route::get('/', ['uses' => 'DefaultController@index', 'as' => 'index.index']);
 Route::get('/publication/search/async', ['uses' => 'PublicationController@search', 'as' => 'index.publication.search']);
 Route::get('/publication/search/words', ['uses' => 'PublicationController@searchWords', 'as' => 'index.publication.searchWords']);
 Route::get('/publication/{publication}', ['uses' => 'PublicationController@show', 'as' => 'index.publication.show']);
