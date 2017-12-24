@@ -10,3 +10,8 @@
 //TODO Funcionalidad de compartir por redes sociales
 //TODO Recuperar contraseña
 //TODO Footer
+
+//Middlewares
+//TODO roles de usuario
+//TODO Publicacion solo por creadores
+//TODO Restringir publicaciones publicadas

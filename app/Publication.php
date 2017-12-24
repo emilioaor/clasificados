@@ -10,7 +10,7 @@ class Publication extends Model
     /** Estatus de las publicaciones */
     const STATUS_PUBLISHED = 1;
     const STATUS_HIDDEN = 2;
-    const STATUS_PENDING_PAY = 3;
+    const STATUS_EXPIRED = 3;
 
     /** Maxima cantidad de imagenes para una publicacion */
     const MAX_IMAGES_FREE = 4;
@@ -98,8 +98,9 @@ class Publication extends Model
         if ($this->video) {
             $this->video = str_replace('watch?v=', 'embed/', $this->video);
         }
-
-        $this->user_id = Auth::user()->id;
+        if (Auth::check()) {
+            $this->user_id = Auth::user()->id;
+        }
         $this->generateSearch();
 
         return parent::save($options);

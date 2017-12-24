@@ -39,16 +39,36 @@
                                 <span class="bg-success text-success">Publicado</span>
                             @elseif($publication->status === \App\Publication::STATUS_HIDDEN)
                                 <span class="bg-warning text-warning">Borrador</span>
+                            @elseif($publication->status === \App\Publication::STATUS_EXPIRED)
+                                <span class="bg-danger text-danger">Expirada</span>
                             @endif
                         </td>
                         <td>{{ \App\Publication::CURRENCY_SYMBOL }}{{ $publication->getFormattedPrice() }}</td>
                         <td>
-                            <button class="btn-warning" title="Editar" onclick="location.href = '{{ route('publication.edit', ['publication' => $publication->public_id]) }}'">
+                            <button
+                                    @if($publication->status !== \App\Publication::STATUS_EXPIRED)
+                                        class="btn-warning"
+                                    @endif
+                                    title="Editar"
+                                    onclick="location.href = '{{ route('publication.edit', ['publication' => $publication->public_id]) }}'"
+                                    @if($publication->status === \App\Publication::STATUS_EXPIRED)
+                                        disabled
+                                    @endif
+                                    >
                                 <i class="glyphicon glyphicon-edit"></i>
                             </button>
                         </td>
                         <td>
-                            <button class="btn-primary" title="Vista previa" onclick="window.open('{{ route('index.publication.show', ['publication' => $publication->public_id]) }}', '_Blank')">
+                            <button
+                                    @if($publication->status !== \App\Publication::STATUS_EXPIRED)
+                                        class="btn-primary"
+                                    @endif
+                                    title="Vista previa"
+                                    onclick="window.open('{{ route('index.publication.show', ['publication' => $publication->public_id]) }}', '_Blank')"
+                                    @if($publication->status === \App\Publication::STATUS_EXPIRED)
+                                        disabled
+                                    @endif
+                                    >
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </button>
                         </td>
