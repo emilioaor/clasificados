@@ -1,13 +1,12 @@
 // ADMINISTRADOR
 
-
 // USUARIO
 //TODO Publicidad en los posts
 //TODO notificaciones en base a lista de deseos
-//TODO configuracion
 
 // DEFAULT
 //TODO Agregar información de contacto, etc
 //TODO Eliminar por gratis despues de 30 dias
 //TODO Funcionalidad de compartir por redes sociales
 //TODO Recuperar contraseña
+//TODO Footer

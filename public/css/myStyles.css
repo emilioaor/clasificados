@@ -269,3 +269,9 @@ select {
 .single-left2 ul.com li.btn span {
     left: 0;
 }
+.service-breadcrumb .glyphicon {
+    margin-right: 0;
+}
+.service-breadcrumb li {
+    padding-right: 10px;
+}

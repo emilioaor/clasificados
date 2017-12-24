@@ -11,7 +11,6 @@
                     <i class="glyphicon glyphicon-tasks"></i> Categorías
                 </a>
             @endif
-            <i>|</i>
         </li>
 
         @else
@@ -25,7 +24,6 @@
                     <i class="glyphicon glyphicon-blackboard"></i> Publicaciones
                 </a>
             @endif
-            <i>|</i>
         </li>
 
         <li>
@@ -36,7 +34,6 @@
                     <i class="glyphicon glyphicon-plus"></i> Nueva publicación
                 </a>
             @endif
-            <i>|</i>
         </li>
 
         <li>
@@ -47,7 +44,6 @@
                     <i class="glyphicon glyphicon-gift"></i> Lista de deseos
                 </a>
             @endif
-            <i>|</i>
         </li>
         @endif
 
@@ -55,7 +51,7 @@
             @if($selected === 'user.config')
                 <i class="glyphicon glyphicon-cog"></i> Configuración
             @else
-                <a href="{{ route('publication.create') }}">
+                <a href="{{ route('user.config') }}">
                     <i class="glyphicon glyphicon-cog"></i> Configuración
                 </a>
             @endif

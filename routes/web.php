@@ -11,6 +11,7 @@ Route::get('/publication/{publication}', ['uses' => 'PublicationController@show'
 // Usuarios normales
 Route::get('/logout', ['uses' => 'DefaultController@logout', 'as' => 'index.logout']);
 Route::group(['prefix' => 'user'], function() {
+    // Publicaciones
     Route::post('/publication/{publication}/uploadImage', ['uses' => 'User\PublicationController@uploadImage', 'as' => 'publication.uploadImage']);
     Route::delete('/publication/deleteImage', ['uses' => 'User\PublicationController@deleteImage', 'as' => 'publication.deleteImage']);
     Route::put('/publication/{publication}/updatePosition', ['uses' => 'User\PublicationController@updatePosition', 'as' => 'publication.updatePosition']);
@@ -18,13 +19,18 @@ Route::group(['prefix' => 'user'], function() {
     Route::resource('/publication', 'User\PublicationController');
 
     // Lista de deseos
-    Route::get('whistList', ['uses' => 'User\WhistListController@index', 'as' => 'user.whistList.index']);
-    Route::post('whistList/{publication}', ['uses' => 'User\WhistListController@addPublication', 'as' => 'user.whistList.addPublication']);
-    Route::delete('whistList/{publication}', ['uses' => 'User\WhistListController@removePublication', 'as' => 'user.whistList.removePublication']);
+    Route::get('/whistList', ['uses' => 'User\WhistListController@index', 'as' => 'user.whistList.index']);
+    Route::post('/whistList/{publication}', ['uses' => 'User\WhistListController@addPublication', 'as' => 'user.whistList.addPublication']);
+    Route::delete('/whistList/{publication}', ['uses' => 'User\WhistListController@removePublication', 'as' => 'user.whistList.removePublication']);
+
+    // Configuracion
+    Route::get('/config', ['uses' => 'User\UserController@config', 'as' => 'user.config']);
+    Route::put('/configUpdate', ['uses' => 'User\UserController@configUpdate', 'as' => 'user.configUpdate']);
 });
 
 // Admin
 Route::group(['prefix' => 'admin'], function() {
+    // Configuracion de cateogorias, subcategorias y opciones
     Route::get('/', ['uses' => 'Admin\AdminController@index', 'as' => 'admin.index']);
     Route::post('/addCategory', ['uses' => 'Admin\AdminController@addCategory', 'as' => 'admin.addCategory']);
     Route::put('/updateCategory/{category}', ['uses' => 'Admin\AdminController@updateCategory', 'as' => 'admin.updateCategory']);
