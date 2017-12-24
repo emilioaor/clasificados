@@ -91,13 +91,17 @@
                     @endif
                 </div>
                 <div class="single-left3">
-                    @if(! empty($publication->video))
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe width="560" height="315" src="{{ $publication->video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    @endif
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if(! empty($publication->video))
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe width="560" height="315" src="{{ $publication->video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                                </div>
+                            @endif
 
-                    <p>{{ $publication->description }}</p>
+                            <p>{{ $publication->description }}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="single-left4">
                     <h4>Compartir</h4>
@@ -123,6 +127,10 @@
                             <div class="clearfix"> </div>
                         </div>
                     @endforeach
+
+                    <div class="text-center">
+                        {{ $comments->render() }}
+                    </div>
 
                     @if(Auth::check())
                         <form action="{{ route('publication.addComment', ['publication' => $publication->public_id]) }}" method="post">

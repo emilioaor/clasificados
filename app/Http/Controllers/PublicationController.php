@@ -25,7 +25,7 @@ class PublicationController extends Controller
     public function show($publicId)
     {
         $publication = Publication::where('public_id', $publicId)->first();
-        $comments = $publication->comments()->orderBy('created_at', 'DESC')->where('parent', null)->limit(10)->get();
+        $comments = $publication->comments()->orderBy('created_at', 'DESC')->where('parent', null)->paginate(10);
         $relatedPosts = Publication::where('status', Publication::STATUS_PUBLISHED)
             ->where('category_id', $publication->category_id)
             ->where('id', '<>', $publication->id)
