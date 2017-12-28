@@ -237,13 +237,15 @@ select {
 }
 .search-autocomplete {
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 10px;
     width: 50%;
     text-align: left;
 }
 .search-autocomplete input {
     color: #fff;
+    border: solid 1px;
+    border-radius: 2px;
 }
 .search-autocomplete span {
     color: #fff;
@@ -282,4 +284,16 @@ select {
 #notificationModal .form-group {
     padding-top: .5rem;
     padding-bottom: .5rem;
+}
+.header-top {
+    height: 55px;
+    background: rgba(0,0,0, 0.3);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all .5s;
+}
+.header-top.in {
+    background-color: #e16b5b;
 }

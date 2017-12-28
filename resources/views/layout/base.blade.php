@@ -30,7 +30,7 @@
 <!--/banner-section-->
 <div id="demo-1" class="banner-inner">
     <div class="banner-inner-dott">
-        <div class="header-top">
+        <div class="header-top" id="nav">
 
             @include('layout.header')
         </div>
@@ -186,6 +186,14 @@
             }
         });
     }
+
+    $(document).on('scroll', function() {
+        if ($(document).scrollTop() > 200) {
+            $('#nav').addClass('in');
+        } else {
+            $('#nav').removeClass('in');
+        }
+    });
 </script>
 @yield('js')
 

@@ -25,9 +25,9 @@
 @include('layout.notifications')
 
 <!--/banner-section-->
-<div id="demo-1" data-zs-src='[""]' data-zs-overlay="dots">
+<div id="demo-1" data-zs-src='["{{ asset('img/1.jpg') }}", "{{ asset('img/2.jpg') }}", "{{ asset('img/3.jpg') }}", "{{ asset('img/4.jpg') }}", "{{ asset('img/5.jpg') }}"]'>
     <div class="demo-inner-content">
-        <div class="header-top">
+        <div class="header-top" id="nav">
             @include('layout.header')
 
             <div class="clearfix"></div>
@@ -272,6 +272,14 @@
             }
         });
     }
+
+    $(document).on('scroll', function() {
+        if ($(document).scrollTop() > 200) {
+            $('#nav').addClass('in');
+        } else {
+            $('#nav').removeClass('in');
+        }
+    });
 </script>
 
 </body>
