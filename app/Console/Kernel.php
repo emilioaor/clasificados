@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\DeleteExpiredPublications;
+use App\Console\Commands\GenerateNotification;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         DeleteExpiredPublications::class,
+        GenerateNotification::class,
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(DeleteExpiredPublications::class)->dailyAt('00:00');
+        $schedule->command(GenerateNotification::class)->hourly();
     }
 
     /**

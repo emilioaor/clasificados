@@ -198,6 +198,18 @@ class Publication extends Model
     }
 
     /**
+     * Todoss los usuarios que se les notifico de esta publicacion. Las notificaciones
+     * se generan cada hora en base a la lista de deseos de cada usuario
+     *
+     * @return $this
+     */
+    public function userNotified()
+    {
+        return $this->belongsToMany('App\User', 'notifications', 'publication_id', 'user_id')
+            ->withPivot(['status']);
+    }
+
+    /**
      * Contruye un array con las opciones seleccionadas para esta publicacion
      *
      * @return array

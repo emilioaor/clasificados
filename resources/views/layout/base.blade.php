@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-<!-- //sign-up-->
+@include('layout.modalNotification')
 <!--//banner-section-->
 <!--/breadcrumb-->
 <div class="service-breadcrumb w3-agile">
@@ -171,6 +171,20 @@
             space.css('display', 'block');
             space.html(html);
         }
+    }
+
+    /**
+     * Marca leidas todas las notificaciones
+     */
+    function markAsRead()
+    {
+        $.ajax({
+            method: 'post',
+            url: '{{ route('user.notification.markRead') }}',
+            data: {
+                _token: '{{ csrf_token() }}'
+            }
+        });
     }
 </script>
 @yield('js')

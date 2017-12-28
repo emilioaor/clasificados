@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -73,5 +75,25 @@ class UserController extends Controller
         $this->sessionMessages('Configuración actualizada');
 
         return redirect()->route('user.config');
+    }
+
+    /**
+     * Marca como leidas todas las notificaiones del usuario autenticado
+     *
+     * @return JsonResponse
+     */
+    public function markRead()
+    {
+        $user = Auth::user();
+        $notifications = $user->notifications()->where('notifications.status', User::STATUS_NOTIFICATION_UNREAD)->get();
+        $now = new \DateTime();
+
+        foreach ($notifications as $publication) {
+            $publication->pivot->status = User::STATUS_NOTIFICATION_READ;
+            $publication->pivot->updated_at = $now;
+            $publication->pivot->save();
+        }
+
+        return new JsonResponse(['success' => true]);
     }
 }

@@ -84,7 +84,7 @@
         </div>
     </div>
 </div>
-<!-- //sign-up-->
+@include('layout.modalNotification')
 
 @foreach($categoryGroups as $g => $group)
     <div class="featured_section_w3l">
@@ -259,6 +259,19 @@
         }
     }
 
+    /**
+     * Marca leidas todas las notificaciones
+     */
+    function markAsRead()
+    {
+        $.ajax({
+            method: 'post',
+            url: '{{ route('user.notification.markRead') }}',
+            data: {
+                _token: '{{ csrf_token() }}'
+            }
+        });
+    }
 </script>
 
 </body>

@@ -279,3 +279,7 @@ select {
 .search-box	ul li button{
     margin: 0 .5rem !important;
 }
+#notificationModal .form-group {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}

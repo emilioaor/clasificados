@@ -13,6 +13,10 @@ class User extends Authenticatable
     const LEVEL_USER = 1;
     const LEVEL_ADMIN = 2;
 
+    /** Estatus de las notificaciones */
+    const STATUS_NOTIFICATION_READ = 1;
+    const STATUS_NOTIFICATION_UNREAD = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -72,5 +76,28 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    /**
+     * Todas las notificaciones del usuario. Se generan cada hora en base a la
+     * lista de deseos de cada usuario
+     *
+     * @return $this
+     */
+    public function notifications()
+    {
+        return $this->belongsToMany('App\Publication', 'notifications', 'user_id', 'publication_id')
+            ->withPivot(['status']);
+    }
+
+    /**
+     * Obtiene las ultimas notificaciones
+     *
+     * @param int $limit
+     * @return \Illuminate\Support\Collection
+     */
+    public function lastNotifications($limit = 10)
+    {
+        return $this->notifications()->orderByDesc('created_at')->limit($limit)->get();
     }
 }

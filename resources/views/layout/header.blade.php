@@ -11,6 +11,12 @@
     <ul>
         @if(Auth::check() && Auth::user()->level === \App\User::LEVEL_USER)
             <li>
+                <a href="#" data-toggle="modal" data-target="#notificationModal" onclick="markAsRead()">
+                    <span class="glyphicon glyphicon-cloud"></span>
+                    Notificaciones
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('user.whistList.index') }}">
                     <span class="glyphicon glyphicon-gift"></span>
                     Lista de deseos

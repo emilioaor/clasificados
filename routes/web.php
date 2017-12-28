@@ -36,6 +36,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'authCheck'], function() {
     // Configuracion
     Route::get('/config', ['uses' => 'User\UserController@config', 'as' => 'user.config']);
     Route::put('/configUpdate', ['uses' => 'User\UserController@configUpdate', 'as' => 'user.configUpdate']);
+
+    // Notificaciones
+    Route::post('/notifications/markAsRead', ['uses' => 'User\UserController@markRead', 'as' => 'user.notification.markRead']);
 });
 
 // Admin
