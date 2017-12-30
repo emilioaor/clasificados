@@ -1,5 +1,17 @@
 @extends('layout.base')
 
+@section('meta')
+    <meta property="og:url"           content="{{ route('index.publication.show', ['publication' => $publication->public_id]) }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ env('APP_NAME') . ' - ' . $publication->title }}" />
+    <meta property="og:description"   content="{{ str_limit($publication->description, 130, '') }}" />
+    @if(count($publication->publicationImages))
+        <meta property="og:image"         content="{{ asset('uploads/publication/normal/' . $publication->id . '/' . $publication->publicationImages[0]->url) }}" />
+    @else
+        <meta property="og:image"         content="{{ asset('img/camera.png') }}" />
+    @endif
+@endsection
+
 @section('current-position')
     @include('layout.nav', ['selected' => 'publication.show'])
 @endsection
@@ -106,10 +118,9 @@
                 <div class="single-left4">
                     <h4>Compartir</h4>
                     <ul class="social-icons social-icons1">
-                        <li><a href="#" class="icon icon-border icon-border1 facebook"></a></li>
-                        <li><a href="#" class="icon icon-border icon-border1 twitter"></a></li>
-                        <li><a href="#" class="icon icon-border icon-border1 instagram"></a></li>
-                        <li><a href="#" class="icon icon-border icon-border1 pinterest"></a></li>
+                        <li><a href="JavaScript:shareSocial('{{ $social['facebook'] }}', 'Facebook')" class="icon icon-border icon-border1 facebook"></a></li>
+                        <li><a href="JavaScript:shareSocial('{{ $social['twitter'] }}', 'Twitter')" class="icon icon-border icon-border1 twitter"></a></li>
+                        <li><a href="JavaScript:shareSocial('{{ $social['pinterest'] }}', 'Pinterest')" class="icon icon-border icon-border1 pinterest"></a></li>
                     </ul>
                 </div>
                 <div class="comments agile-info">
@@ -242,4 +253,16 @@
 
 @section('js')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}&callback=initMap" async defer></script>
+    <script>
+        /**
+         * Abre una ventana para compartir por redes sociales
+         * @param url
+         * @param title
+         */
+        function shareSocial(url, title)
+        {
+            var share = window.open(url , title, "width=600,height=400");
+
+        }
+    </script>
 @endsection

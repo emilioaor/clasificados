@@ -5,6 +5,7 @@
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @yield('meta')
     <!-- //for-mobile-apps -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/zoomslider.css') }}" />
@@ -24,6 +25,7 @@
     <!--//web-fonts-->
 </head>
 <body>
+@yield('after-body')
 
 @include('layout.notifications')
 

@@ -3,4 +3,3 @@
 // USUARIO
 
 // DEFAULT
-//TODO Funcionalidad de compartir por redes sociales

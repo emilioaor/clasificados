@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Publication;
+use Chencha\Share\ShareFacade;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,7 @@ class PublicationController extends Controller
             'publication' => $publication,
             'comments' => $comments,
             'relatedPosts' => $relatedPosts,
+            'social' => ShareFacade::load(route('index.publication.show', ['publication' => $publication->public_id]), $publication->title)->services(),
         ]);
     }
 
