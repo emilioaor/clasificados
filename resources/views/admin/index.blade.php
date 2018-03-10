@@ -24,48 +24,42 @@
                                 <!-- Lista de categorias -->
                                 <div class="row">
                                     @foreach($categories as $category)
-                                        <div class="col-sm-6">
+                                        @if($category->status === \App\Category::STATUS_ACTIVE)
+                                            <div class="col-sm-6">
 
-                                            <form action="{{ route('admin.updateCategory', ['category' => $category->id]) }}" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('PUT') }}
-                                                <input type="hidden" name="collapse" value="1">
+                                                <form action="{{ route('admin.updateCategory', ['category' => $category->id]) }}" method="post">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <input type="hidden" name="collapse" value="1">
 
-                                                <div class="row">
-                                                    <div class="col-xs-5">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="name" value="{{ $category->name }}" required>
+                                                    <div class="row">
+                                                        <div class="col-xs-5">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" name="name" value="{{ $category->name }}" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-3">
+
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <div class="form-group text-center">
+                                                                <button class="btn btn-default">
+                                                                    <i class="glyphicon glyphicon-ok"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <div class="form-group text-center">
+                                                                <a href="" class="btn btn-danger" onclick="return confirm('¿Desea eliminar esta categoria?')">
+                                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-5">
-                                                        <div class="form-group">
-                                                            <select name="status" class="form-control">
-                                                                <option
-                                                                        value="{{ App\Category::STATUS_ACTIVE }}"
-                                                                        {{ $category->status === App\Category::STATUS_ACTIVE ? 'selected' : '' }}
-                                                                        >
-                                                                    Activo
-                                                                </option>
-                                                                <option
-                                                                        value="{{ App\Category::STATUS_INACTIVE }}"
-                                                                        {{ $category->status === App\Category::STATUS_INACTIVE ? 'selected' : '' }}
-                                                                        >
-                                                                    Inactivo
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-2">
-                                                        <div class="form-group text-center">
-                                                            <button class="btn btn-default">
-                                                                <i class="glyphicon glyphicon-ok"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                                </form>
 
-                                        </div>
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
 
