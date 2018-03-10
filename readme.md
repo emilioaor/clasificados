@@ -2,6 +2,7 @@ Clasificados
 =============================================
 
 Página web de clasificados. Con 2 tipos de publicaciones (Gratis y pagas). Control de imágenes, ubicación por google maps y pagos por paypal.
+
 Niveles de usuarios:
 --------------------------------------------------------------------------------
 
